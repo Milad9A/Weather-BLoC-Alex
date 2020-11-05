@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:bloc_test1/features/weather/data/models/weather.dart';
+import '../../../weather/data/models/weather.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -82,5 +82,4 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     }
     return theme;
   }
-}
 }

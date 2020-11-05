@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
-import 'bloc/weather_bloc.dart';
 import 'features/theme/presentation/bloc/theme_bloc.dart';
 import 'features/weather/data/repositories/repositories.dart';
+import 'features/weather/presentation/bloc/weather_bloc.dart';
 import 'features/weather/presentation/widgets/widgets.dart';
 import 'simple_bloc_observer.dart';
 
