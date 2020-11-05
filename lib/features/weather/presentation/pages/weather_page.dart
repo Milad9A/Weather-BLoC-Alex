@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/widgets/gradient_cotainer.dart';
+import '../../../settings/presentation/pages/settings_page.dart';
 import '../../../theme/presentation/bloc/theme_bloc.dart';
 import '../bloc/weather_bloc.dart';
 import '../widgets/widgets.dart';
 
-class Weather extends StatefulWidget {
+class WeatherPage extends StatefulWidget {
   @override
-  _WeatherState createState() => _WeatherState();
+  _WeatherPageState createState() => _WeatherPageState();
 }
 
-class _WeatherState extends State<Weather> {
+class _WeatherPageState extends State<WeatherPage> {
   Completer<void> _refreshCompleter;
 
   @override
@@ -28,6 +29,17 @@ class _WeatherState extends State<Weather> {
       appBar: AppBar(
         title: Text('BLoC Weather'),
         actions: [
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingsPage(),
+                ),
+              );
+            },
+          ),
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () async {

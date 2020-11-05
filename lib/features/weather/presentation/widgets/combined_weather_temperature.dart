@@ -1,14 +1,17 @@
-import 'package:flutter/material.dart';
-
+import '../../../settings/presentation/bloc/settings_bloc.dart';
 import '../../data/models/models.dart' as model;
 import 'widgets.dart';
+import 'package:flutter/material.dart';
+
+import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CombinedWeatherTemperature extends StatelessWidget {
   final model.Weather weather;
 
-  const CombinedWeatherTemperature({
+  CombinedWeatherTemperature({
     Key key,
-    this.weather,
+    @required this.weather,
   })  : assert(weather != null),
         super(key: key);
 
@@ -18,17 +21,22 @@ class CombinedWeatherTemperature extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Padding(
               padding: EdgeInsets.all(20.0),
               child: WeatherConditions(condition: weather.condition),
             ),
             Padding(
               padding: EdgeInsets.all(20.0),
-              child: Temperature(
-                temperature: weather.temp,
-                high: weather.maxTemp,
-                low: weather.minTemp,
+              child: BlocBuilder<SettingsBloc, SettingsState>(
+                builder: (context, state) {
+                  return Temperature(
+                    temperature: weather.temp,
+                    high: weather.maxTemp,
+                    low: weather.minTemp,
+                    units: state.temperatureUnits,
+                  );
+                },
               ),
             ),
           ],
@@ -37,7 +45,7 @@ class CombinedWeatherTemperature extends StatelessWidget {
           child: Text(
             weather.formattedCondition,
             style: TextStyle(
-              fontSize: 30.0,
+              fontSize: 30,
               fontWeight: FontWeight.w200,
               color: Colors.white,
             ),

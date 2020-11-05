@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
+import 'features/settings/presentation/bloc/settings_bloc.dart';
 import 'features/theme/presentation/bloc/theme_bloc.dart';
 import 'features/weather/data/repositories/repositories.dart';
 import 'features/weather/presentation/bloc/weather_bloc.dart';
@@ -18,9 +19,17 @@ void main() {
   );
 
   runApp(
-    BlocProvider(
-        create: (context) => ThemeBloc(),
-        child: App(weatherRepository: weatherRepository)),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<ThemeBloc>(
+          create: (context) => ThemeBloc(),
+        ),
+        BlocProvider<SettingsBloc>(
+          create: (context) => SettingsBloc(),
+        ),
+      ],
+      child: App(weatherRepository: weatherRepository),
+    ),
   );
 }
 
@@ -43,7 +52,7 @@ class App extends StatelessWidget {
           home: BlocProvider(
             create: (context) =>
                 WeatherBloc(weatherRepository: weatherRepository),
-            child: Weather(),
+            child: WeatherPage(),
           ),
         );
       },
